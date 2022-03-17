@@ -13,7 +13,7 @@ module Gen.Types.Help
     Desc (..),
     Nest (..),
     rawHelpText,
-    flattenHelp,
+    renderHelp,
   )
 where
 
@@ -67,40 +67,38 @@ instance FromJSON Help where
 instance ToJSON Help where
   toJSON = toJSON . Nest 0
 
-data Nest = Nest !Int64 Help
-
-instance ToJSON Nest where
-  toJSON (Nest n h) =
-    toJSON
-      . mappend "-- |"
-      . Text.Lazy.map f
-      . Text.Lazy.drop (n + 2)
-      . wrap (Text.Lazy.replicate n " " <> "-- ")
-      $ flattenHelp h
-    where
-      f '@' = '\''
-      f x = x
-
 data Desc = Desc !Int64 Help
 
 instance ToJSON Desc where
-  toJSON (Desc n h) =
-    toJSON
-      . wrap (Text.Lazy.replicate n " ")
-      $ flattenHelp h
+  toJSON (Desc n h) = toJSON (wrapHelp (Text.Lazy.replicate n " ") h)
+
+data Nest = Nest !Int64 Help
+
+instance ToJSON Nest where
+  toJSON = toJSON . renderHelp
+
+renderHelp :: Nest -> TextLazy
+renderHelp (Nest n h) =
+  mappend (sep <> "| ")
+    . Text.Lazy.drop (Text.Lazy.length sep)
+    . wrapHelp sep
+    $ h
+  where
+    sep = Text.Lazy.replicate n " " <> "-- "
+
+wrapHelp :: TextLazy -> Help -> TextLazy
+wrapHelp sep =
+  Text.Lazy.dropWhileEnd Char.isSpace
+    . Text.Lazy.unlines
+    . map (mappend sep)
+    . Text.Lazy.lines
+    . flattenHelp
 
 flattenHelp :: Help -> TextLazy
 flattenHelp = \case
   Help xs -> foldMap flattenHelp xs
   Raw t -> Text.Lazy.fromStrict t
   Pan d _t -> either (error . show) Text.Lazy.fromStrict (writeHaddock d)
-
-wrap :: TextLazy -> TextLazy -> TextLazy
-wrap sep =
-  Text.Lazy.dropWhileEnd Char.isSpace
-    . Text.Lazy.unlines
-    . map (mappend sep)
-    . Text.Lazy.lines
 
 readMarkdown :: Text -> Either PandocError Pandoc
 readMarkdown =
@@ -123,5 +121,5 @@ writeHaddock =
     options =
       Pandoc.def
         { Pandoc.writerWrapText = Pandoc.WrapAuto,
-          Pandoc.writerColumns = 2048
+          Pandoc.writerColumns = 1024
         }
