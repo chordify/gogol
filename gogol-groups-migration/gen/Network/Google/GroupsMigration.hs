@@ -1,57 +1,58 @@
-{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE TypeOperators     #-}
-
-{-# OPTIONS_GHC -fno-warn-unused-imports    #-}
 {-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.GroupsMigration
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
 --
--- The Groups Migration API allows domain administrators to archive emails
--- into Google groups.
+-- The Groups Migration API allows domain administrators to archive emails into Google groups.
 --
 -- /See:/ <https://developers.google.com/google-apps/groups-migration/ Groups Migration API Reference>
 module Network.Google.GroupsMigration
-    (
-    -- * Service Configuration
-      groupsMigrationService
+  ( -- * Configuration
+    groupsMigrationService,
 
     -- * OAuth Scopes
-    , appsGroupsMigrationScope
-
-    -- * API Declaration
-    , GroupsMigrationAPI
+    appsGroupsMigrationScope,
 
     -- * Resources
 
     -- ** groupsmigration.archive.insert
-    , module Network.Google.Resource.GroupsMigration.Archive.Insert
+    GroupsMigrationArchiveInsertResource,
+    newGroupsMigrationArchiveInsert,
+    GroupsMigrationArchiveInsert,
 
     -- * Types
 
-    -- ** Groups
-    , Groups
-    , groups
-    , gKind
-    , gResponseCode
-
     -- ** Xgafv
-    , Xgafv (..)
-    ) where
+    Xgafv (..),
 
-import Network.Google.Prelude
+    -- ** Groups
+    Groups (..),
+    newGroups,
+  )
+where
+
+import Network.Google.GroupsMigration.Archive.Insert
 import Network.Google.GroupsMigration.Types
-import Network.Google.Resource.GroupsMigration.Archive.Insert
-
-{- $resources
-TODO
--}
-
--- | Represents the entirety of the methods and resources available for the Groups Migration API service.
-type GroupsMigrationAPI = ArchiveInsertResource
