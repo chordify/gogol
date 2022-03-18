@@ -1,41 +1,52 @@
-{-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE DataKinds          #-}
-{-# LANGUAGE DeriveGeneric      #-}
-{-# LANGUAGE NoImplicitPrelude  #-}
-{-# LANGUAGE OverloadedStrings  #-}
-
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PatternSynonyms #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# OPTIONS_GHC -fno-warn-duplicate-exports #-}
+{-# OPTIONS_GHC -fno-warn-name-shadowing #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- |
 -- Module      : Network.Google.KnowledgeGraphSearch.Types
--- Copyright   : (c) 2015-2016 Brendan Hay
+-- Copyright   : (c) 2015-2022 Brendan Hay
 -- License     : Mozilla Public License, v. 2.0.
--- Maintainer  : Brendan Hay <brendan.g.hay@gmail.com>
+-- Maintainer  : Brendan Hay <brendan.g.hay+gogol@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
---
 module Network.Google.KnowledgeGraphSearch.Types
-    (
-    -- * Service Configuration
-      knowledgeGraphSearchService
+  ( -- * Configuration
+    knowledgeGraphSearchService,
 
-    -- * SearchResponse
-    , SearchResponse
-    , searchResponse
-    , srContext
-    , srItemListElement
-    , srType
+    -- * Types
 
-    -- * Xgafv
-    , Xgafv (..)
-    ) where
+    -- ** Xgafv
+    Xgafv (..),
 
-import Network.Google.KnowledgeGraphSearch.Types.Product
-import Network.Google.KnowledgeGraphSearch.Types.Sum
-import Network.Google.Prelude
+    -- ** SearchResponse
+    SearchResponse (..),
+    newSearchResponse,
+  )
+where
 
--- | Default request referring to version 'v1' of the Knowledge Graph Search API. This contains the host and root path used as a starting point for constructing service requests.
-knowledgeGraphSearchService :: ServiceConfig
-knowledgeGraphSearchService
-  = defaultService (ServiceId "kgsearch:v1")
-      "kgsearch.googleapis.com"
+import Network.Google.KnowledgeGraphSearch.Internal.Product
+import Network.Google.KnowledgeGraphSearch.Internal.Sum
+import qualified Network.Google.Prelude as Core
+
+-- | Default request referring to version @v1@ of the Knowledge Graph Search API. This contains the host and root path used as a starting point for constructing service requests.
+knowledgeGraphSearchService :: Core.ServiceConfig
+knowledgeGraphSearchService =
+  Core.defaultService
+    (Core.ServiceId "kgsearch:v1")
+    "kgsearch.googleapis.com"
