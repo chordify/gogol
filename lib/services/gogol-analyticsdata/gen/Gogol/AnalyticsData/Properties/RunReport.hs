@@ -46,7 +46,7 @@ import Gogol.AnalyticsData.Types
 -- | A resource alias for @analyticsdata.properties.runReport@ method which the
 -- 'AnalyticsDataPropertiesRunReport' request conforms to.
 type AnalyticsDataPropertiesRunReportResource =
-     "v1beta" Core.:>
+     "v1beta" Core.:> "properties" Core.:>
        Core.CaptureMode "property" "runReport" Core.Text
          Core.:>
          Core.QueryParam "$.xgafv" Xgafv Core.:>
